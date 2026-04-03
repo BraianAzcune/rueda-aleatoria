@@ -1,21 +1,20 @@
 import type { WheelItem } from "../../../types";
 import { ColorPicker } from "../../ColorPicker/ColorPicker";
 import { EditableLabel } from "./EditableLabel";
+import { PercentageEditor } from "./PercentageEditor";
 
 type ConfigItemRowProps = Readonly<{
 	item: WheelItem;
 	onColorChange: (id: string, color: string) => void;
 	onLabelChange: (id: string, label: string) => void;
+	onPercentageChange: (id: string, percentage: number) => void;
 }>;
-
-function formatNumber(value: number): string {
-	return Number.isInteger(value) ? String(value) : value.toFixed(2);
-}
 
 export function ConfigItemRow({
 	item,
 	onColorChange,
 	onLabelChange,
+	onPercentageChange,
 }: ConfigItemRowProps) {
 	return (
 		<li class="rounded-xl border border-gray-700 bg-gray-900/60 p-3">
@@ -26,9 +25,10 @@ export function ConfigItemRow({
 						onChange={(label) => onLabelChange(item.id, label)}
 					/>
 				</div>
-				<p class="text-sm font-medium text-gray-100">
-					{formatNumber(item.percentage)}%
-				</p>
+				<PercentageEditor
+					value={item.percentage}
+					onChange={(percentage) => onPercentageChange(item.id, percentage)}
+				/>
 				<ColorPicker
 					value={item.color}
 					onChange={(color) => onColorChange(item.id, color)}

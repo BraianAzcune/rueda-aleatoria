@@ -6,6 +6,7 @@ export function ConfigPanel() {
 	const items = useWheelStore((s) => s.items);
 	const updateColor = useWheelStore((s) => s.updateColor);
 	const updateLabel = useWheelStore((s) => s.updateLabel);
+	const updatePercentage = useWheelStore((s) => s.updatePercentage);
 
 	return (
 		<aside class="w-full max-w-sm p-4 md:p-6">
@@ -15,6 +16,7 @@ export function ConfigPanel() {
 					items={items}
 					onColorChange={updateColor}
 					onLabelChange={updateLabel}
+					onPercentageChange={updatePercentage}
 				/>
 			</div>
 		</aside>

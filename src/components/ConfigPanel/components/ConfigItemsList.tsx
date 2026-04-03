@@ -5,12 +5,14 @@ type ConfigItemsListProps = Readonly<{
 	items: WheelItem[];
 	onColorChange: (id: string, color: string) => void;
 	onLabelChange: (id: string, label: string) => void;
+	onPercentageChange: (id: string, percentage: number) => void;
 }>;
 
 export function ConfigItemsList({
 	items,
 	onColorChange,
 	onLabelChange,
+	onPercentageChange,
 }: ConfigItemsListProps) {
 	if (items.length === 0) {
 		return (
@@ -32,6 +34,7 @@ export function ConfigItemsList({
 						item={item}
 						onColorChange={onColorChange}
 						onLabelChange={onLabelChange}
+						onPercentageChange={onPercentageChange}
 					/>
 				))}
 			</ul>
