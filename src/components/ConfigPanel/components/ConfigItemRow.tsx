@@ -19,8 +19,8 @@ export function ConfigItemRow({
 	onRemove,
 }: ConfigItemRowProps) {
 	return (
-		<li class="flex items-stretch gap-2">
-			<div class="flex min-w-0 flex-1 items-center gap-3 rounded-xl border border-gray-700 bg-gray-900/60 p-3">
+		<li class="flex flex-col gap-2 sm:flex-row sm:items-stretch">
+			<div class="flex min-w-0 flex-1 flex-wrap items-center gap-3 rounded-xl border border-gray-700 bg-gray-900/60 p-3 sm:flex-nowrap">
 				<div class="min-w-0 flex-1">
 					<EditableLabel
 						value={item.label}
@@ -39,7 +39,7 @@ export function ConfigItemRow({
 			</div>
 			<button
 				type="button"
-				class="rounded-xl border border-red-500/40 px-2 text-red-300 transition hover:bg-red-500/10 hover:text-red-200"
+				class="self-end rounded-xl border border-red-500/40 px-3 py-2 text-red-300 transition hover:bg-red-500/10 hover:text-red-200 sm:self-auto sm:px-2 sm:py-0"
 				title={`Eliminar ${item.label}`}
 				aria-label={`Eliminar ${item.label}`}
 				onClick={() => onRemove(item.id)}
