@@ -1,0 +1,60 @@
+import type { WheelItem } from "../types";
+
+export const DUMMY_ITEMS: WheelItem[] = [
+	{
+		id: "1",
+		label: "Rojo",
+		color: "#ef4444",
+		percentage: 20,
+		startAngle: 0,
+		endAngle: 72,
+	},
+	{
+		id: "2",
+		label: "Azul",
+		color: "#3b82f6",
+		percentage: 20,
+		startAngle: 72,
+		endAngle: 144,
+	},
+	{
+		id: "3",
+		label: "Verde",
+		color: "#22c55e",
+		percentage: 15,
+		startAngle: 144,
+		endAngle: 198,
+	},
+	{
+		id: "4",
+		label: "Amarillo",
+		color: "#eab308",
+		percentage: 15,
+		startAngle: 198,
+		endAngle: 252,
+	},
+	{
+		id: "5",
+		label: "Violeta",
+		color: "#a855f7",
+		percentage: 15,
+		startAngle: 252,
+		endAngle: 306,
+	},
+	{
+		id: "6",
+		label: "Naranja",
+		color: "#f97316",
+		percentage: 10,
+		startAngle: 306,
+		endAngle: 342,
+	},
+	{
+		id: "7",
+		label: "Rosa",
+		color: "#ec4899",
+		percentage: 5,
+		startAngle: 342,
+		endAngle: 360,
+	},
+];
