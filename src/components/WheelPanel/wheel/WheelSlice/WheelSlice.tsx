@@ -1,4 +1,5 @@
 import type { WheelItem } from "../../../../types";
+import { SliceLabel } from "./SliceLabel/SliceLabel";
 
 const R = 180;
 const CX = 200;
@@ -31,22 +32,7 @@ export function WheelSlice({ item }: Props) {
 			<path d={d} fill={color} stroke="#111827" strokeWidth="1.5">
 				<title>{label}</title>
 			</path>
-			<text
-				x={lx}
-				y={ly}
-				textAnchor="middle"
-				dominantBaseline="middle"
-				fill="white"
-				fontSize="12"
-				fontWeight="800"
-				stroke="rgba(0,0,0,0.45)"
-				strokeWidth="0.8"
-				paintOrder="stroke"
-				transform={`rotate(${textRotation}, ${lx}, ${ly})`}
-				style="pointer-events:none;user-select:none"
-			>
-				{label}
-			</text>
+			<SliceLabel label={label} lx={lx} ly={ly} rotation={textRotation} />
 		</g>
 	);
 }

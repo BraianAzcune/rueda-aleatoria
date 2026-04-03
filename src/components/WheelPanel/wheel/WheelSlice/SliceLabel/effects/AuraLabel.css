@@ -1,0 +1,20 @@
+@keyframes aura-label-glow {
+	0%,
+	100% {
+		filter: drop-shadow(0 0 6px rgb(246 59 59 / 90%))
+			drop-shadow(0 0 14px rgb(255 60 0 / 75%))
+			drop-shadow(0 0 28px rgb(246 59 59 / 50%));
+	}
+
+	50% {
+		filter: drop-shadow(0 0 10px rgb(255 100 0 / 100%))
+			drop-shadow(0 0 24px rgb(246 59 59 / 95%))
+			drop-shadow(0 0 48px rgb(255 0 0 / 70%));
+	}
+}
+
+.AuraLabel {
+	--aura-label-pulse-duration: 1s;
+	animation: aura-label-glow var(--aura-label-pulse-duration) ease-in-out
+		infinite;
+}
