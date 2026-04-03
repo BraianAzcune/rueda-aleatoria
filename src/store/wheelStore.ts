@@ -18,7 +18,7 @@ type WheelStore = {
 export const useWheelStore = create<WheelStore>()(
 	persist(
 		(set) => ({
-			items: DUMMY_ITEMS,
+			items: recalculate(DUMMY_ITEMS),
 			isSpinning: false,
 
 			setIsSpinning: (isSpinning) => set(() => ({ isSpinning })),
