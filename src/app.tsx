@@ -16,7 +16,7 @@ export function App() {
 			</div>
 
 			{/* panel derecho */}
-			<div class="flex-1 flex justify-start">
+			<div class="flex-1 flex justify-end">
 				<ConfigPanel />
 			</div>
 		</div>
