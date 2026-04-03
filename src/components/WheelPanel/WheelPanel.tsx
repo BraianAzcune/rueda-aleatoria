@@ -26,6 +26,7 @@ export function WheelPanel() {
 			<StatusBar status={spinStatus} />
 			<Wheel
 				items={items}
+				spinStatus={spinStatus}
 				rotation={rotation}
 				pulseCount={pulseCount}
 				onClick={() => handleSpin(items)}

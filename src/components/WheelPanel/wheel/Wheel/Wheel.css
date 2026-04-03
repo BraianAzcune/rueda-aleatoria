@@ -1,0 +1,48 @@
+@keyframes aura-glow-fill {
+	0%,
+	100% {
+		fill: rgb(162 59 246 / 18%);
+		filter: drop-shadow(
+				0 0 calc(4.4px * var(--aura-glow-scale)) rgb(162 59 246 / 60%)
+			)
+			drop-shadow(
+				0 0 calc(9.9px * var(--aura-glow-scale)) rgb(237 58 127 / 35%)
+			);
+	}
+
+	50% {
+		fill: rgb(237 58 127 / 22%);
+		filter: drop-shadow(
+				0 0 calc(7.7px * var(--aura-glow-scale)) rgb(237 58 127 / 70%)
+			)
+			drop-shadow(
+				0 0 calc(16.5px * var(--aura-glow-scale)) rgb(162 59 246 / 80%)
+			);
+	}
+}
+
+.AuraGlowFill {
+	--aura-glow-scale: 1;
+	--aura-glow-pulse-duration: 4s;
+	animation: aura-glow-fill var(--aura-glow-pulse-duration) ease-in-out infinite;
+}
+
+@keyframes aura-winner-burst {
+	0% {
+		fill: rgb(255 255 255 / 25%);
+		filter: drop-shadow(0 0 55px rgb(237 58 127 / 100%))
+			drop-shadow(0 0 110px rgb(162 59 246 / 90%));
+		opacity: 1;
+	}
+	100% {
+		fill: transparent;
+		filter: drop-shadow(0 0 0px rgb(237 58 127 / 0%))
+			drop-shadow(0 0 0px rgb(162 59 246 / 0%));
+		opacity: 0;
+	}
+}
+
+.AuraWinnerBurst {
+	animation: aura-winner-burst 0.9s ease-out forwards;
+	pointer-events: none;
+}

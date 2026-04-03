@@ -38,7 +38,10 @@ export function WheelSlice({ item }: Props) {
 				dominantBaseline="middle"
 				fill="white"
 				fontSize="12"
-				fontWeight="600"
+				fontWeight="800"
+				stroke="rgba(0,0,0,0.45)"
+				strokeWidth="0.8"
+				paintOrder="stroke"
 				transform={`rotate(${textRotation}, ${lx}, ${ly})`}
 				style="pointer-events:none;user-select:none"
 			>
