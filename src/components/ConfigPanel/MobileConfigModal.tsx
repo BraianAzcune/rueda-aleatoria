@@ -12,36 +12,21 @@ export function MobileConfigModal({ open, onClose }: MobileConfigModalProps) {
 
 		const previousOverflow = document.body.style.overflow;
 		document.body.style.overflow = "hidden";
-
-		function handleKeyDown(event: KeyboardEvent) {
-			if (event.key === "Escape") {
-				onClose();
-			}
-		}
-
-		document.addEventListener("keydown", handleKeyDown);
 		return () => {
 			document.body.style.overflow = previousOverflow;
-			document.removeEventListener("keydown", handleKeyDown);
 		};
-	}, [open, onClose]);
+	}, [open]);
 
 	if (!open) return null;
 
 	return (
 		<div
-			class="fixed inset-0 z-50 flex items-end px-3 pb-3 pt-8 lg:hidden"
+			class="fixed inset-0 z-50 lg:hidden"
 			role="dialog"
 			aria-modal="true"
 			aria-labelledby="mobile-config-title"
 		>
-			<button
-				type="button"
-				class="absolute inset-0 bg-black/70"
-				aria-label="Cerrar configuracion"
-				onClick={onClose}
-			/>
-			<div class="relative max-h-[85dvh] w-full overflow-hidden rounded-3xl border border-gray-700 bg-gray-900 shadow-2xl">
+			<div class="flex h-full w-full flex-col bg-gray-900">
 				<div class="flex items-center justify-between border-b border-gray-700 px-4 py-3">
 					<div>
 						<h2
@@ -61,9 +46,9 @@ export function MobileConfigModal({ open, onClose }: MobileConfigModalProps) {
 					</button>
 				</div>
 
-				<div class="overflow-y-auto px-3 py-3">
+				<div class="min-h-0 flex-1 overflow-y-auto px-3 py-3">
 					<ConfigPanelContent
-						className="border-none bg-transparent p-1 shadow-none backdrop-blur-none"
+						className="min-h-full rounded-none border-none bg-transparent p-1 shadow-none backdrop-blur-none"
 						showHeader={false}
 					/>
 				</div>
