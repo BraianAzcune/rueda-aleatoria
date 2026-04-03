@@ -1,4 +1,5 @@
 import { useRef, useState } from "preact/hooks";
+import { useWheelStore } from "../../store/wheelStore";
 import type { WheelItem } from "../../types";
 import type { SpinStatus } from "./status/StatusBar/StatusBar";
 
@@ -13,7 +14,11 @@ function pickWinner(items: WheelItem[]): WheelItem {
 		rand -= item.percentage;
 		if (rand <= 0) return item;
 	}
-	return items.at(-1)!; // fallback, no debería pasar si los porcentajes suman > 0
+	const fallback = items.at(-1);
+	if (!fallback) {
+		throw new Error("Cannot pick winner from empty items");
+	}
+	return fallback;
 }
 
 function targetRotation(winner: WheelItem, currentRotation: number): number {
@@ -44,6 +49,7 @@ export function useWheelSpin(): UseWheelSpin {
 	const [pendingWinner, setPendingWinner] = useState<WheelItem | null>(null);
 	const [pulseCount, setPulseCount] = useState(0);
 	const liveRotation = useRef(0);
+	const setIsSpinning = useWheelStore((s) => s.setIsSpinning);
 
 	function handleSpin(items: WheelItem[]) {
 		const picked = pickWinner(items);
@@ -54,6 +60,7 @@ export function useWheelSpin(): UseWheelSpin {
 		setRotation(nextRotation);
 		setPulseCount((n) => n + 1);
 		setSpinStatus("spinning");
+		setIsSpinning(true);
 	}
 
 	function handleRotationUpdate(nextRotation: number) {
@@ -64,6 +71,7 @@ export function useWheelSpin(): UseWheelSpin {
 		if (spinStatus !== "spinning") return;
 		setWinner(pendingWinner);
 		setSpinStatus("done");
+		setIsSpinning(false);
 	}
 
 	return {

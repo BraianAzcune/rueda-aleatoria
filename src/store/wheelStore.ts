@@ -6,6 +6,8 @@ import { defaultColor, recalculate } from "./utils/recalculate";
 
 type WheelStore = {
 	items: WheelItem[];
+	isSpinning: boolean;
+	setIsSpinning: (isSpinning: boolean) => void;
 	addItem: (label: string) => void;
 	removeItem: (id: string) => void;
 	updateLabel: (id: string, label: string) => void;
@@ -17,9 +19,13 @@ export const useWheelStore = create<WheelStore>()(
 	persist(
 		(set) => ({
 			items: DUMMY_ITEMS,
+			isSpinning: false,
+
+			setIsSpinning: (isSpinning) => set(() => ({ isSpinning })),
 
 			addItem: (label) =>
 				set((state) => {
+					if (state.isSpinning) return state;
 					const n = state.items.length + 1;
 					const equalPct = 100 / n;
 					const base = state.items.map((item) => ({
@@ -38,22 +44,32 @@ export const useWheelStore = create<WheelStore>()(
 				}),
 
 			removeItem: (id) =>
-				set((state) => ({
-					items: recalculate(state.items.filter((i) => i.id !== id)),
-				})),
+				set((state) => {
+					if (state.isSpinning) return state;
+					return {
+						items: recalculate(state.items.filter((i) => i.id !== id)),
+					};
+				}),
 
 			updateLabel: (id, label) =>
-				set((state) => ({
-					items: state.items.map((i) => (i.id === id ? { ...i, label } : i)),
-				})),
+				set((state) => {
+					if (state.isSpinning) return state;
+					return {
+						items: state.items.map((i) => (i.id === id ? { ...i, label } : i)),
+					};
+				}),
 
 			updateColor: (id, color) =>
-				set((state) => ({
-					items: state.items.map((i) => (i.id === id ? { ...i, color } : i)),
-				})),
+				set((state) => {
+					if (state.isSpinning) return state;
+					return {
+						items: state.items.map((i) => (i.id === id ? { ...i, color } : i)),
+					};
+				}),
 
 			updatePercentage: (id, percentage) =>
 				set((state) => {
+					if (state.isSpinning) return state;
 					const others = state.items.filter((i) => i.id !== id);
 					if (others.length === 0) return state;
 
@@ -76,6 +92,9 @@ export const useWheelStore = create<WheelStore>()(
 					return { items: recalculate(updated) };
 				}),
 		}),
-		{ name: "wheel-store" },
+		{
+			name: "wheel-store",
+			partialize: (state) => ({ items: state.items }),
+		},
 	),
 );
