@@ -4,6 +4,8 @@ import { ConfigItemsList } from "./components/ConfigItemsList.tsx";
 
 export function ConfigPanel() {
 	const items = useWheelStore((s) => s.items);
+	const addItem = useWheelStore((s) => s.addItem);
+	const removeItem = useWheelStore((s) => s.removeItem);
 	const updateColor = useWheelStore((s) => s.updateColor);
 	const updateLabel = useWheelStore((s) => s.updateLabel);
 	const updatePercentage = useWheelStore((s) => s.updatePercentage);
@@ -17,6 +19,8 @@ export function ConfigPanel() {
 					onColorChange={updateColor}
 					onLabelChange={updateLabel}
 					onPercentageChange={updatePercentage}
+					onRemove={removeItem}
+					onAdd={() => addItem("Opcion")}
 				/>
 			</div>
 		</aside>
