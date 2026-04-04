@@ -1,6 +1,11 @@
 import { weakHash } from "./weakHash";
 
-export type SliceEffect = "glow" | "aura" | "comicSans" | "default";
+export type SliceEffect =
+	| "glow"
+	| "aura"
+	| "comicSans"
+	| "nullException"
+	| "default";
 
 // Hashes are computed from lowercase trigger words via weakHash().
 const EFFECT_MAP: ReadonlyMap<number, SliceEffect> = new Map([
@@ -8,6 +13,7 @@ const EFFECT_MAP: ReadonlyMap<number, SliceEffect> = new Map([
 	[31192, "aura"],
 	[47639, "aura"],
 	[49299, "comicSans"],
+	[50567, "nullException"],
 ]);
 
 export function getEffectForLabel(label: string): SliceEffect {
