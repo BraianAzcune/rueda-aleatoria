@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useRef, useState } from "preact/hooks";
 import { useWheelStore } from "../../store/wheelStore";
 import type { WheelItem } from "../../types";
 import type { SpinStatus } from "./status/StatusBar/StatusBar";
+import { useStopSound } from "./useStopSound";
 
 const FULL_TURNS = 5;
 // El puntero está a las 3 en punto → 90° en coordenadas SVG (0° = arriba)
@@ -49,18 +50,15 @@ export function useWheelSpin(): UseWheelSpin {
 	const [pendingWinner, setPendingWinner] = useState<WheelItem | null>(null);
 	const [pulseCount, setPulseCount] = useState(0);
 	const liveRotation = useRef(0);
+	const pendingItems = useRef<WheelItem[]>([]);
 	const setIsSpinning = useWheelStore((s) => s.setIsSpinning);
-
-	const stopAudio = useRef<HTMLAudioElement | null>(null);
-	useEffect(() => {
-		const base = import.meta.env.BASE_URL;
-		stopAudio.current = new Audio(`${base}wheel_fin_200msec.wav`);
-	}, []);
+	const { play: playStopSound } = useStopSound();
 
 	function handleSpin(items: WheelItem[]) {
 		const picked = pickWinner(items);
 		const nextRotation = targetRotation(picked, liveRotation.current);
 
+		pendingItems.current = items;
 		setPendingWinner(picked);
 		setWinner(null);
 		setRotation(nextRotation);
@@ -78,11 +76,7 @@ export function useWheelSpin(): UseWheelSpin {
 		setWinner(pendingWinner);
 		setSpinStatus("done");
 		setIsSpinning(false);
-
-		if (stopAudio.current) {
-			stopAudio.current.currentTime = 0;
-			stopAudio.current.play().catch(() => {});
-		}
+		playStopSound(pendingItems.current);
 	}
 
 	return {
