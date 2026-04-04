@@ -17,6 +17,7 @@ export function ConfigPanelContent({
 	const updateColor = useWheelStore((s) => s.updateColor);
 	const updateLabel = useWheelStore((s) => s.updateLabel);
 	const updatePercentage = useWheelStore((s) => s.updatePercentage);
+	const resetProbabilities = useWheelStore((s) => s.resetProbabilities);
 
 	return (
 		<div
@@ -30,6 +31,7 @@ export function ConfigPanelContent({
 				onPercentageChange={updatePercentage}
 				onRemove={removeItem}
 				onAdd={() => addItem("Opcion")}
+				onResetProbabilities={resetProbabilities}
 			/>
 		</div>
 	);

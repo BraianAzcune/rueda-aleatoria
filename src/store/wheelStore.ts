@@ -13,6 +13,7 @@ type WheelStore = {
 	updateLabel: (id: string, label: string) => void;
 	updateColor: (id: string, color: string) => void;
 	updatePercentage: (id: string, percentage: number) => void;
+	resetProbabilities: () => void;
 };
 
 export const useWheelStore = create<WheelStore>()(
@@ -64,6 +65,19 @@ export const useWheelStore = create<WheelStore>()(
 					if (state.isSpinning) return state;
 					return {
 						items: state.items.map((i) => (i.id === id ? { ...i, color } : i)),
+					};
+				}),
+
+			resetProbabilities: () =>
+				set((state) => {
+					if (state.isSpinning) return state;
+					const n = state.items.length;
+					if (n === 0) return state;
+					const equalPct = 100 / n;
+					return {
+						items: recalculate(
+							state.items.map((item) => ({ ...item, percentage: equalPct })),
+						),
 					};
 				}),
 
