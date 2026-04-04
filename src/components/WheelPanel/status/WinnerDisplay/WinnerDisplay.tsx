@@ -13,7 +13,7 @@ function WinnerBadge({ winner }: { readonly winner: WheelItem }) {
 
 	switch (effect) {
 		case "nullException":
-			return <GlitchWinner label={label}/>;
+			return <GlitchWinner label={label} />;
 		default:
 			return <DefaultWinner label={label} color={winner.color} />;
 	}

@@ -10,7 +10,7 @@ type Props = { readonly status: SpinStatus };
 
 export function StatusBar({ status }: Props) {
 	return (
-		<p class="text-sm font-medium tracking-wide text-gray-400">
+		<p class="text-sm font-medium tracking-wide text-white">
 			{MESSAGES[status]}
 		</p>
 	);

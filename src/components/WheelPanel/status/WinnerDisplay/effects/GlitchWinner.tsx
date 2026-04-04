@@ -1,6 +1,6 @@
 import "./GlitchWinner.css";
 
-type Props = { readonly label: string; };
+type Props = { readonly label: string };
 
 export function GlitchWinner({ label }: Props) {
 	return (
